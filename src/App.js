@@ -9,7 +9,16 @@ function App() {
 	const [currentWeather, setCurrentWeather] = useState(null);
 	const [forecast, setForecast] = useState(null);
 
+	if(!navigator.geolocation) {
+    return
+  } else {
+    navigator.geolocation.getCurrentPosition((position) => {
+			// console.log(position)
+		});
+  }
+
 	const handleOnSearchChange = (searchData) => {
+		// console.log(searchData);
 		const [lat, lon] = searchData.value.split(" ");
 
 		const currentWeatherFetch = fetch(
