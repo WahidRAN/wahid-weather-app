@@ -9,16 +9,20 @@ function App() {
 	const [currentWeather, setCurrentWeather] = useState(null);
 	const [forecast, setForecast] = useState(null);
 
+	// Causing infinite request
 	if(!navigator.geolocation) {
     return
   } else {
     navigator.geolocation.getCurrentPosition((position) => {
-			// console.log(position)
+			const userPosition = {
+				label: "Your Place",
+				value: `${position.coords.latitude} ${position.coords.longitude}`
+			}
+			return handleOnSearchChange(userPosition);
 		});
   }
 
 	const handleOnSearchChange = (searchData) => {
-		// console.log(searchData);
 		const [lat, lon] = searchData.value.split(" ");
 
 		const currentWeatherFetch = fetch(
